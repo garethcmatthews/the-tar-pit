@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE RelativeLayout>
+<phpunit colors="true" bootstrap="./Bootstrap.php">
+    <testsuites>
+        <testsuite name="CoreExceptions">
+            <directory>./ServerMonitor/Core/Exception</directory>
+        </testsuite>
+        <testsuite name="Helpers">
+            <directory>./ServerMonitor/Helper</directory>
+        </testsuite>
+        <testsuite name="Resources">
+            <directory>./ServerMonitor/Resource</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../ServerMonitor/Core/Exception</directory>
+            <directory suffix=".php">../ServerMonitor/Helper</directory>
+             <directory suffix=".php">../ServerMonitor/Resource</directory>
+            <exclude>            
+                <file>./ServerMonitor/Helper/ResourceTraitImplementor.php</file>            
+            </exclude>
+        </whitelist>
+    </filter> 
+</phpunit>

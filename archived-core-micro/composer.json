@@ -1,0 +1,28 @@
+{
+    "name": "crossplatformcoder/cpccore",
+    "description": "A PHP Micro Framework built upon Zend framework 2 Components",
+    "homepage": "https://github.com/CrossPlatformCoder/CPCCore",
+    "type": "library",
+    "license": "BSD 3-Clause",
+    "version": "1.0.0",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Gareth C Matthews",
+            "email": "garethmatthews911@gmail.com",
+            "homepage": "http://crossplatformcoder.github.io/CPCCore/"
+        }
+    ],
+    "repositories": [
+    ],
+    "homepage": "http://framework.zend.com/",
+    "require": {
+        "php": ">=5.5",
+        "zendframework/zendframework": ">=2.4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "CPCCore\\": "src/CPCCore"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="../src/Bootstrap.php">
+    <testsuites>
+        <testsuite name="UnitTests">
+            <directory suffix="Test.php">./UnitTests</directory>
+        </testsuite>
+        <testsuite name="IntegrationTests">
+            <directory suffix="Test.php">./IntegrationTests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./../src/CPCCore</directory>
+            <exclude>
+                <directory>./../vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

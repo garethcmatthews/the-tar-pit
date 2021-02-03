@@ -1,0 +1,4 @@
+SetEnv APPLICATION_ENVIRONMENT 'development'
+
+RewriteEngine On
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]

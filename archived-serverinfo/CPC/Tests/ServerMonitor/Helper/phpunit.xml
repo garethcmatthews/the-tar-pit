@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE RelativeLayout>
+<phpunit colors="true" bootstrap="../../Bootstrap.php">
+    <testsuite name="Helper">
+        <directory>./</directory>
+    </testsuite>
+    <filter>
+        <whitelist>     
+            <directory suffix=".php">../../../ServerMonitor/Helper</directory>
+        </whitelist>
+    </filter>     
+</phpunit>
