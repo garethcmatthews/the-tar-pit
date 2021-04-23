@@ -1,0 +1,196 @@
+body {
+    background-color:#f5f5f5;
+}
+
+html {
+    overflow-y: scroll !important;
+}
+
+.modal-open {
+    padding-right: 0 !important;
+}
+
+@-moz-document url-prefix() {
+    fieldset { display: table-cell; }
+}
+
+#NavigationMain {
+
+}
+
+#NavigationMain a.dropdown-toggle span.glyphicon {
+    padding-right: 4px; 
+}
+
+#NavigationMain ul.dropdown-menu span.glyphicon {
+    padding-right: 8px;   
+}
+
+#NavigationMain button .glyphicon {
+    padding-right: 8px;   
+}
+
+#NavigationMain li.active a{
+    background-color: #dddddd;
+    color:black;
+}
+
+#NavigationMain .navbar-brand {
+    color: white;
+    cursor: default;
+}
+
+#NavigationMain .dropdown-toggle {
+    color:white;
+}
+
+#NavigationMain .dropdown-toggle:hover {
+    color: #337ab7!important;
+}
+
+#NavigationToolbar {
+    background-color:white;
+    border:none;
+    left:0px;
+    margin:0;
+    padding:0px 0;
+    position: fixed;
+    top:51px;
+    width:100%;
+    z-index:1000;
+    box-shadow: 0 4px 4px 0px #999;
+    -webkit-box-shadow: 0 4px 4px 0px #999;
+    -moz-box-shadow: 0 4px 4px 0px #999;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+#NavigationToolbar div.btn-group.widescreen-on {
+    border-left: none;
+    border-right: none;
+}
+
+#NavigationToolbar div.btn-group.widescreen-off {
+    border-left: 1px solid #adadad;
+    border-right: 1px solid #adadad;
+}
+
+#NavigationToolbar div.btn-group a {
+    border:none !important;
+    border-right: 1px solid #adadad !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+#NavigationToolbar div.btn-group a.btnLast{
+    border-right: none !important;
+}
+
+#NavigationToolbar div.btn-group a.active{
+    background-color: #337ab7;
+    color: white;
+}
+
+#NavigationToolbar div.toolbar-nopadding{
+    padding-left: 0;
+    padding-right:0;
+}
+
+#NavigationToolbar div.toolbar-padding{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#MainContent {
+    margin-top: 106px;
+}
+
+#MainContent .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #fcf8e3;
+}
+
+#MainContent .panel{
+    border: 3px solid #dddddd;
+    -webkit-border-radius: 2px;
+    -moz-border-radius:  2px;
+    border-radius: 2px;
+}
+
+#MainContent .panel-heading {
+    color: black;
+    /*font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;*/
+    font-size: 20px;
+    font-weight: bold;
+    height: 36px;
+    letter-spacing: 0.5px;
+    line-height:36px;
+    margin-bottom: 12px;
+    padding: 0 2px;
+}
+
+#MainContent .panel-body{
+    border-top: none;
+    padding: 0 8px;
+    margin-bottom:0px;
+}
+
+#MainContent div.progress {
+    margin-bottom: 8px;
+}
+
+#ToastBanner{
+    bottom:16px;
+    height:auto;
+    position:fixed;
+    text-align:center;
+    width:100%;
+} 
+
+#ToastBanner p.content{
+    background-color: #383838;     
+    display: inline-block;
+    color: white;
+    font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-right:auto;
+    opacity: 0.9;
+    padding:8px 16px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
+
+@media screen and (min-width: 768px) {
+    #NavigationToolbar div.btn-group a.btnFirst{
+        border-left: 1px solid #adadad;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    #NavigationToolbar div.container{
+        padding: 0;
+    }
+
+    #MainContent [class*='col-'] {
+        padding-right:8px;
+        padding-left:8px;
+    }
+}
+
+#searchClear {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ccc;
+}

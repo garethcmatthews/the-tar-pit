@@ -1,0 +1,37 @@
+{
+    "name": "crossplatformcoder/cpc-service-opcache",
+    "homepage": "http://github.com/CrossPlatformCoder/cpc-service-opcache",
+    "description": "Service for interacting with PHP's Opcache",
+    "type": "library",
+    "keywords": [
+        "php",
+        "service",
+        "opcache"
+    ],
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "Gareth C Matthews (Crossplatformcoder)",
+            "email": "gareth@crossplatformcoder.com",
+            "homepage": "http://www.crossplatformcoder.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "zendframework/zend-servicemanager": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "CPC\\Service\\Opcache\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CPC\\Service\\Test\\": "test/"
+        }
+    }
+}

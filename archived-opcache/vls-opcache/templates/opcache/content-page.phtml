@@ -1,0 +1,119 @@
+<div id="ContentTabs" class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="ContentTabs-Overview">
+        <?php echo $this->Partial('opcache::partials/overview-partial', ['memory' => $this->memoryUsage, 'status' => $this->status, 'statistics' => $this->statistics]); ?>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="ContentTabs-Scripts">
+        <?php echo $this->Partial('opcache::partials/scripts-partial', ['scripts' => $this->scripts]); ?>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="ContentTabs-Information">
+        <?php echo $this->Partial('opcache::partials/information-partial', ['functions' => $this->functions, 'version' => $this->version, 'directives' => $this->directives]); ?>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        function invalidateFile(filename, index) {
+            var error = "Failed to Invalidate File";
+            $.ajax({
+                url: "/invalidate",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    'filename': filename
+                },
+                beforeSend: function () {
+                    $("#ScriptsTableList button.btnInvalidate").prop('disabled', true);
+                },
+                complete: function () {
+                    $("#ScriptsTableList button.btnInvalidate").prop('disabled', false);
+                },
+                error: function () {
+                    showToast(error, true, true);
+                },
+                success: function (response) {
+                    if (response.status === "success") {
+                        window.showToast("File Invalidated", true);                        
+                        
+                        $("#ScriptsTableList > tbody tr").eq(index).remove();
+                        window.CachedFilesTotal--;
+                        renderScriptsDisplayedText();
+
+                    } else {
+                        window.showToast(error, true, true);
+                    }
+                }
+            });
+        }
+
+        function renderScriptsDisplayedText() {
+            var scriptsDisplayed = $("#ScriptsTableList > tbody").find("tr").filter(function () {
+                return $(this).css('display') !== 'none';
+            }).length;
+            $('#ScriptsTableListDisplayed').text('Displaying ' + scriptsDisplayed + ' of ' + window.CachedFilesTotal + ' Scripts');
+        }
+
+        function showScriptsDetailsColumn() {
+            var removeClass = "btn-default btn-info";
+
+            if (window.ShowScriptsDetailsColumn === true) {
+                $("#btnScriptDetails span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+                $("#ContentTabs-Scripts-Details table .details").show();
+            } else {
+                $("#ContentTabs-Scripts-BtnDetails span").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+                $("#ContentTabs-Scripts-Details table .details").hide();
+            }
+
+            window.ShowScriptsDetailsColumn = !window.ShowScriptsDetailsColumn;
+        }
+
+        $("#searchInput").keyup(function (event) {
+            event.preventDefault();
+            var data = this.value.toUpperCase().split(" ");
+            var obj = $("#ScriptsTableList").find("tr td.ScriptName");
+
+            if (this.value === "") {
+                obj.show();
+                return;
+            }
+
+            obj.closest("tr").hide();
+            obj.filter(function (i, v) {
+                var $t = $(this);
+                for (var d = 0; d < data.length; ++d) {
+                    if ($t.text().toUpperCase().indexOf(data[d]) > -1) {
+                        return true;
+                    }
+                }
+                return false;
+            }).closest("tr").show();
+
+            renderScriptsDisplayedText();
+        });
+
+        $("#searchClear").click(function (event) {
+            event.preventDefault();
+            $("#searchInput").val('');
+            $("#ScriptsTableList").find("tr").show();
+            renderScriptsDisplayedText();
+        });
+
+        $("#btnScriptDetails").click(function (event) {
+            event.preventDefault();
+            showScriptsDetailsColumn();
+        });
+
+        $("#ScriptsTableList button.btnInvalidate").click(function (event) {
+            event.preventDefault();
+            var index = $(this).parent().parent().index();
+            var filename = $(this).parent().parent().find("td.ScriptName:first").text();
+
+            invalidateFile(filename, index);
+        });
+
+        // Main
+        window.CachedFilesTotal = $("#ScriptsTableList > tbody").find("tr").length;
+        showScriptsDetailsColumn();
+        renderScriptsDisplayedText();
+    });
+
+</script>

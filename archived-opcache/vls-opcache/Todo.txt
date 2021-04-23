@@ -1,0 +1,13 @@
+=============================================================================
+= TODO
+=============================================================================
+
+1. Write functional tests.
+2. Style up - Improve basic Bootstrap look and feel.
+3. Add baseurl code to allow project to run from sub folder
+4. Add Blacklist functionality
+5. Improve filter clear button
+6. Write a user guide
+7. add error handling middleware
+8. add prod/release setting for css and js
+

@@ -1,0 +1,135 @@
+<?php
+$memoryUsed = $this->FormatPercentage(($memory["used_memory"] / $memory["free_memory"]) * 100);
+$memoryWastedPercentage = $this->FormatPercentage($memory["current_wasted_percentage"]);
+$memoryWastedPercentageDisplay = $this->FormatPercentage($memory["current_wasted_percentage"], 2);
+$opcacheHitRate = $this->FormatPercentage($statistics["opcache_hit_rate"]);
+?>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body">  
+                <div class="panel-heading">Memory Usage</div>
+                <p><strong>Used Memory Percentage</strong></p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $memoryUsed; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $memoryUsed; ?>;min-width: 2em;">
+                        <?php echo $memoryUsed; ?>
+                    </div>
+                </div>
+                <p><strong>Current Wasted Percentage</strong></p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<?php echo $memoryWastedPercentage; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $memoryWastedPercentage; ?>;min-width: 2em;">
+                        <?php echo $memoryWastedPercentageDisplay; ?>
+                    </div>
+                </div>
+                <div class="table-responsive" style="margin-top:24px;">
+                    <table class="table table-striped">
+                        <tr>                                    
+                            <th>Used Memory</th>
+                            <td><?php echo $this->FormatMemorySize($memory["used_memory"]); ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Free Memory</th>
+                            <td><?php echo $this->FormatMemorySize($memory["free_memory"]); ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Wasted Memory</th>
+                            <td><?php echo $this->FormatMemorySize($memory["wasted_memory"]); ?></td>
+                        </tr>
+                    </table>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-body">   
+                <div class="panel-heading">Statistics</div>
+                <p><strong>Opcache Hit Rate</strong></p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo $opcacheHitRate; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $opcacheHitRate; ?>;min-width: 2em;">
+                        <?php echo $opcacheHitRate; ?>
+                    </div>
+                </div>
+                <div class="table-responsive" style="margin-top:24px;">
+                    <table class="table table-striped">
+                        <tr>                                    
+                            <th>Hits</th>
+                            <td><?php echo $statistics["hits"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Misses</th>
+                            <td><?php echo $statistics["misses"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Blacklist Misses</th>
+                            <td><?php echo $statistics["blacklist_misses"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Blacklist miss Ratio</th>
+                            <td><?php echo $statistics["blacklist_miss_ratio"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Start Time</th>
+                            <td><?php echo date("d/m/Y@H:i:s", $statistics["start_time"]); ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Last Restart Time</th>
+                            <td><?php echo date("d/m/Y@H:i:s", $statistics["last_restart_time"]); ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Number of Cached Scripts</th>
+                            <td><?php echo $statistics["num_cached_scripts"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Number of Cached Keys</th>
+                            <td><?php echo $statistics["num_cached_keys"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Number of Cached Scripts</th>
+                            <td><?php echo $statistics["max_cached_keys"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Oom Restarts</th>
+                            <td><?php echo $statistics["oom_restarts"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Hash Restarts</th>
+                            <td><?php echo $statistics["hash_restarts"]; ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Manual Restarts</th>
+                            <td><?php echo $statistics["manual_restarts"]; ?></td>
+                        </tr>
+                    </table>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body">   
+                <div class="panel-heading">Status</div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>                                    
+                            <th>Opcache Enabled</th>
+                            <td><?php echo $this->BooleanToStringHelper($status["opcache_enabled"]); ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Cache Full</th>
+                            <td><?php echo $this->BooleanToStringHelper($status["cache_full"]); ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Restart Pending</th>
+                            <td><?php echo $this->BooleanToStringHelper($status["restart_pending"]); ?></td>
+                        </tr>
+                        <tr>                                    
+                            <th>Restart in Progress</th>
+                            <td><?php echo $this->BooleanToStringHelper($status["restart_in_progress"]); ?></td>
+                        </tr>
+                    </table>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

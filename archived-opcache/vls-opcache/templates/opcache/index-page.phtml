@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>CPC - Opcache</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="/css/bootstrap-3.3.7/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="/css/main-min.css" media="screen" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/js/jquery-3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap-3.3.7/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            window.ContentTab = '<?php echo $this->config->content_tab; ?>';
+            window.IsWidescreen = <?php echo $this->config->wide_screen ? 'true' : 'false'; ?>;
+            window.OpcacheResetConfirm = <?php echo $this->config->opcache_reset_confirm ? 'true' : 'false'; ?>;
+            window.RefreshTimerAutoStart = <?php echo $this->config->auto_refresh ? 'true' : 'false'; ?>;
+            window.RefreshInterval = <?php echo (int) $this->config->auto_refresh_interval; ?>;
+            window.ShowScriptsDetailsColumn = <?php echo $this->config->show_scripts_details_column ? 'true' : 'false'; ?>;
+        </script>
+        <script type="text/javascript" src="/js/main.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav id="NavigationMain" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" id="btnClearCache" data-tab="overview" class="btn btn-danger navbar-btn"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>Reset Cache</button>                        
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-nav-collapse" aria-expanded="false">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-header hidden-xs">
+                            <span class="navbar-brand">CPC Opcache</span>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-nav-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li role="presentation" class="dropdown" >
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Settings <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" id="mnuAutoRefresh">Enable Auto Refresh</a></li>
+                                    <li><a class="hidden-xs" href="#" id="mnuWideScreen">Set Widescreen On</a></li>
+                                </ul>
+                            </li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>Help <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="https://github.com/CrossPlatformCoder/cpc-opcache/blob/master/README.md" target="help"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>User Guide</a></li>
+                                    <li><a href="https://github.com/CrossPlatformCoder/cpc-opcache" target="help"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>Github Project</a></li>
+                                    <li><a href="http://php.net/manual/en/book.opcache.php" target="help"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Opcache Manual</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="http://www.crossplatformcoder.com/" target="help"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>CrossplatformCoder</a></li>
+                                    <li><a href="/about" data-toggle="modal" data-target="#AboutModal"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>About CPC Opache</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>   
+            <div class="panel panel-default" id="NavigationToolbar">                
+                <div class="container">
+                    <div class="btn-group btn-group-justified widescreen-off" role="group" aria-label="Justified button group"> 
+                        <a href="#" id="btnOverview" data-tab="Overview" class="btn btn-default btnFirst" role="button">Overview</a>
+                        <a href="#" id="btnScripts" data-tab="Scripts" class="btn btn-default" role="button">Scripts</a>
+                        <a href="#" id="btnInformation" data-tab="Information" class="btn btn-default btnLast" role="button">Information</a> 
+                    </div>
+                </div>
+            </div>   
+        </header>
+        <main>
+            <div id="MainContent" class="container">
+            </div>
+        </main>
+        <div id="ConfirmationModal" data-mode="" data-id="" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="ConfirmationModalTitle"></h4>
+                    </div>
+                    <div class="modal-body" id="ConfirmationModalBody">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button id="ConfirmationModalYes" type="button" class="btn btn-primary">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="AboutModal" tabindex="-1" role="dialog" aria-labelledby="AboutModal" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
+        <div id="ToastBanner" style="display:none;">
+            <p class="content"></p>
+        </div>
+    </body>
+</html>
